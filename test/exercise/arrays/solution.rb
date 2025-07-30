@@ -13,8 +13,21 @@ module Exercise
         end
       end
 
-      def search(_array, _query)
-        0
+      def search(array, query)
+        b_search(array, query, 0, array.size - 1)
+      end
+
+      private
+
+      def b_search(array, query, start_i, end_i)
+        return -1 if start_i > end_i
+
+        middle_i = (start_i + end_i) / 2
+        return middle_i if array[middle_i] == query
+
+        start_i = middle_i + 1 if array[middle_i] < query
+        end_i = middle_i - 1 if array[middle_i] > query
+        b_search(array, query, start_i, end_i)
       end
     end
   end
