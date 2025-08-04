@@ -13,10 +13,10 @@ module Exercise
       end
 
       # Написать свою функцию my_map
-      def my_map
-        result = MyArray.new
-        my_each { |element| result << yield(element) }
-        result
+      def my_map(acc = MyArray.new, index = 0, &block)
+        return acc if index >= size
+
+        my_map(acc.push(yield(self[index])), index + 1, &block)
       end
 
       # Написать свою функцию my_compact
