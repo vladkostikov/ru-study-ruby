@@ -27,23 +27,15 @@ module Exercise
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce(acc = nil)
-        skip_first_element = false
+      def my_reduce(acc = nil, index = 0, &block)
+        return acc if index >= size
+
         if acc.nil?
           acc = first
-          skip_first_element = true
+          index = 1
         end
 
-        my_each do |element|
-          if skip_first_element
-            skip_first_element = false
-            next
-          end
-
-          acc = yield(acc, element)
-        end
-
-        acc
+        my_reduce(yield(acc, self[index]), index + 1, &block)
       end
     end
   end
