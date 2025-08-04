@@ -21,9 +21,10 @@ module Exercise
 
       # Написать свою функцию my_compact
       def my_compact
-        result = MyArray.new
-        my_each { |element| result << element unless element.nil? }
-        result
+        my_reduce(MyArray.new) do |acc, element|
+          acc.push(element) unless element.nil?
+          acc
+        end
       end
 
       # Написать свою функцию my_reduce
