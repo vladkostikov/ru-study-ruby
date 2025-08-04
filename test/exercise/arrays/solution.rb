@@ -8,22 +8,18 @@ module Exercise
         end
       end
 
-      def search(array, query)
-        b_search(array, query, 0, array.size - 1)
-      end
-
-      private
-
-      def b_search(array, query, start_i, end_i)
-        return -1 if start_i > end_i
+      def search(array, query, start_i = 0, end_i = array.size - 1)
+        return -1 if start_i > end_i || array[start_i] > query || array[end_i] < query
 
         middle_i = (start_i + end_i) / 2
         return middle_i if array[middle_i] == query
 
         start_i = middle_i + 1 if array[middle_i] < query
         end_i = middle_i - 1 if array[middle_i] > query
-        b_search(array, query, start_i, end_i)
+        search(array, query, start_i, end_i)
       end
+
+      private
 
       def find_max(array)
         max_value = array.first
