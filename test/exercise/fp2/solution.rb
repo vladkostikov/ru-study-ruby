@@ -31,15 +31,12 @@ module Exercise
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce(acc = nil, index = 0, &block)
-        return acc if index >= size
+      def my_reduce(acc = nil, &block)
+        return acc if empty?
 
-        if acc.nil?
-          acc = first
-          index = 1
-        end
-
-        my_reduce(yield(acc, self[index]), index + 1, &block)
+        element = first
+        new_acc = acc.nil? ? element : yield(acc, element)
+        MyArray.new(self[1..]).my_reduce(new_acc, &block)
       end
     end
   end
